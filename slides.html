@@ -64,9 +64,9 @@
 
         .fish1 img { transform: scaleX(-1); } 
         .fish2 img { transform: scaleX(-1); } 
-        .fish3 img { transform: scaleX(1); }  /* Imagem normal, encara a esquerda */
+        .fish3 img { transform: scaleX(1); }
         .fish4 img { transform: scaleX(-1); } 
-        .fish5 img { transform: scaleX(1); }  /* Imagem normal, encara a esquerda */
+        .fish5 img { transform: scaleX(1); }
 
 
         @keyframes swimLTR {
@@ -176,9 +176,8 @@
         #referencias .slide-content li {
             text-align: left; 
             margin-bottom: 8px;
-            word-break: break-word; /* Melhor que break-all para URLs */
+            word-break: break-word;
         }
-        /* #referencias .slide-content a removido pois não há mais tags <a> */
 
 
         .intro-layout {
@@ -241,7 +240,7 @@
         #analise .nav-button, 
         #solucoes .nav-button, 
         #conclusao .nav-button, 
-        #referencias .nav-button { /* Estilo unificado para botões em fundos escuros */
+        #referencias .nav-button {
             background-color: #4A90E2; 
             border-color: #7FDBFF;
         }
@@ -257,14 +256,13 @@
         .nav-buttons-container .nav-button { margin-left: 10px; margin-right: 10px; }
         
         .nav-button.back-to-top { 
-            background-color: #718096; /* Cor padrão para "Voltar à Capa" */
-            border-color: transparent; /* Remove borda específica se não for necessária */
+            background-color: #718096; 
+            border-color: transparent;
         }
         .nav-button.back-to-top:hover {
             background-color: #4a5568;
         }
 
-        /* Garante que o botão "Voltar à Capa" na conclusão e referências use o estilo de fundo escuro */
         #conclusao .nav-button.back-to-top,
         #referencias .nav-button.back-to-top { 
             background-color: #60A5FA; 

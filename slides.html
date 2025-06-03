@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação: Diagrama de Ishikawa - Slides</title>
+    <link rel="icon" href="https://i.imgur.com/wn494DE.webp" type="image/webp">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px; 
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ocean-background-effects {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .fish-container {
+            position: absolute;
+            width: 100px; 
+            height: 50px; 
+            opacity: 0.7; 
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .fish-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            display: block;
+        }
+
+        .fish1 { top: 20%; left: -110px; animation-name: swimLTR; animation-duration: 75s; animation-delay: 0s; } 
+        .fish2 { top: 60%; left: -120px; animation-name: swimLTR; animation-duration: 90s; animation-delay: 10s; width: 120px; height: 60px; } 
+        .fish3 { top: 40%; right: -100px; animation-name: swimRTL; animation-duration: 60s; animation-delay: 20s; } 
+        .fish4 { top: 80%; left: -110px; animation-name: swimLTR; animation-duration: 80s; animation-delay: 5s; width: 80px; height: 40px; }  
+        .fish5 { top: 30%; right: -105px; animation-name: swimRTL; animation-duration: 78s; animation-delay: 25s; width: 90px; height: 45px; }
+
+        .fish1 img { transform: scaleX(-1); } 
+        .fish2 img { transform: scaleX(-1); } 
+        .fish3 img { transform: scaleX(1); }  /* Imagem normal, encara a esquerda */
+        .fish4 img { transform: scaleX(-1); } 
+        .fish5 img { transform: scaleX(1); }  /* Imagem normal, encara a esquerda */
+
+
+        @keyframes swimLTR {
+            0% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+            20% { transform: translateX(20vw) translateY(-15px) rotate(-4deg); }
+            40% { transform: translateX(40vw) translateY(15px) rotate(4deg); }
+            60% { transform: translateX(60vw) translateY(-10px) rotate(-3deg); }
+            80% { transform: translateX(80vw) translateY(10px) rotate(3deg); }
+            100% { transform: translateX(110vw) translateY(0px) rotate(0deg); }
+        }
+        @keyframes swimRTL {
+            0% { transform: translateX(0px) translateY(0px) rotate(0deg); }
+            20% { transform: translateX(-20vw) translateY(-15px) rotate(4deg); }
+            40% { transform: translateX(-40vw) translateY(15px) rotate(-4deg); }
+            60% { transform: translateX(-60vw) translateY(-10px) rotate(3deg); }
+            80% { transform: translateX(-80vw) translateY(10px) rotate(-3deg); }
+            100% { transform: translateX(-110vw) translateY(0px) rotate(0deg); }
+        }
+
+
+        .slide:last-child {
+            border-bottom: none;
+        }
+
+        .slide-content {
+            max-width: 800px;
+            width: 90%;
+            background-color: rgba(255, 255, 255, 0.92); 
+            padding: 35px 45px; 
+            border-radius: 15px; 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12); 
+            text-align: left; 
+            position: relative;
+            z-index: 2;
+        }
+
+        #introducao { background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%); }
+        #o-que-e { background: linear-gradient(135deg, #4682B4 0%, #5F9EA0 100%); }
+        #construindo { background: linear-gradient(135deg, #5F9EA0 0%, #00008B 100%); }
+        #analise { background: linear-gradient(135deg, #00008B 0%, #191970 100%); }
+        #solucoes { background: linear-gradient(135deg, #191970 0%, #000030 100%); }
+        
+        #conclusao {
+            background: linear-gradient(to bottom, 
+                #000030 0%, 
+                #0a0a23 50%, 
+                #706250 88%, 
+                #8B795E 100%
+            );
+        }
+        #referencias {
+            background: #050518; 
+        }
+
+
+        #construindo .slide-content h2,
+        #analise .slide-content h2,
+        #solucoes .slide-content h2,
+        #conclusao .slide-content h2,
+        #referencias .slide-content h2 { color: #ffffff; }
+
+        #construindo .slide-content p, #construindo .slide-content li,
+        #analise .slide-content p, #analise .slide-content li,
+        #solucoes .slide-content p, #solucoes .slide-content li,
+        #conclusao .slide-content p, #conclusao .slide-content li,
+        #referencias .slide-content p, #referencias .slide-content li { color: #e0e6f0; }
+
+        #construindo .slide-content strong,
+        #analise .slide-content strong,
+        #solucoes .slide-content strong,
+        #conclusao .slide-content strong,
+        #referencias .slide-content strong { color: #f0f8ff; }
+        
+        #construindo .slide-content,
+        #analise .slide-content,
+        #solucoes .slide-content,
+        #conclusao .slide-content,
+        #referencias .slide-content {
+            background-color: rgba(10, 25, 47, 0.8);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        }
+
+        .slide h2 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 2.2rem;
+            color: #2c3e50; 
+            margin-bottom: 25px;
+            text-align: left; 
+        }
+
+        .slide p, .slide li { 
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #34495e; 
+            margin-bottom: 15px;
+            text-align: justify; 
+        }
+
+        .slide ul {
+            list-style-position: outside;
+            padding-left: 20px;
+        }
+        #referencias .slide-content ul { 
+            padding-left: 20px;
+            list-style-type: disc; 
+        }
+        #referencias .slide-content li {
+            text-align: left; 
+            margin-bottom: 8px;
+            word-break: break-word; /* Melhor que break-all para URLs */
+        }
+        /* #referencias .slide-content a removido pois não há mais tags <a> */
+
+
+        .intro-layout {
+            display: flex;
+            flex-direction: row; 
+            align-items: center; 
+            gap: 30px; 
+            margin-bottom: 20px; 
+        }
+
+        .intro-texto { flex: 1; min-width: 0; }
+        .intro-imagem { flex: 0 0 45%; max-width: 45%; display: flex; justify-content: center; align-items: center; }
+
+        .imagem-slide { 
+            max-width: 100%; 
+            max-height: 300px; 
+            border-radius: 8px; 
+            display: block; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 15px auto;
+        }
+        
+        @media (max-width: 768px) {
+            .intro-layout { flex-direction: column; align-items: center; }
+            .intro-texto { width: 100%; margin-bottom: 20px; }
+            .slide h2 { text-align: center; } 
+            .intro-imagem { width: 80%; max-width: 400px; margin-top: 15px; }
+            .imagem-slide { margin: 15px auto; }
+            .fish-container { width: 60px; height: 30px; }
+        }
+
+        .diagrama-ishikawa-placeholder {
+            width: 100%; max-width: 600px; min-height: 200px; padding: 10px; margin: 25px auto;
+            display: flex; justify-content: center; align-items: center;
+            border-radius: 8px; background-color: rgba(247, 250, 252, 0.9);
+        }
+        .diagrama-ishikawa-placeholder img { max-width: 100%; max-height: 400px; border-radius: 4px; object-fit: contain; }
+        
+        #construindo .diagrama-ishikawa-placeholder,
+        #analise .diagrama-ishikawa-placeholder,
+        #solucoes .diagrama-ishikawa-placeholder,
+        #conclusao .diagrama-ishikawa-placeholder,
+        #referencias .diagrama-ishikawa-placeholder { 
+            background-color: rgba(45, 55, 72, 0.75);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-button {
+            display: inline-block; padding: 10px 25px; margin-top: 25px;
+            background-color: #3498db; color: white; text-decoration: none;
+            border-radius: 8px; 
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.95rem; 
+            border: 1px solid transparent; 
+        }
+        .nav-button:hover { background-color: #2980b9; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        
+        #construindo .nav-button, 
+        #analise .nav-button, 
+        #solucoes .nav-button, 
+        #conclusao .nav-button, 
+        #referencias .nav-button { /* Estilo unificado para botões em fundos escuros */
+            background-color: #4A90E2; 
+            border-color: #7FDBFF;
+        }
+        #construindo .nav-button:hover, 
+        #analise .nav-button:hover, 
+        #solucoes .nav-button:hover, 
+        #conclusao .nav-button:hover, 
+        #referencias .nav-button:hover {
+            background-color: #357ABD;
+        }
+
+        .nav-buttons-container { text-align: center; margin-top: 20px; }
+        .nav-buttons-container .nav-button { margin-left: 10px; margin-right: 10px; }
+        
+        .nav-button.back-to-top { 
+            background-color: #718096; /* Cor padrão para "Voltar à Capa" */
+            border-color: transparent; /* Remove borda específica se não for necessária */
+        }
+        .nav-button.back-to-top:hover {
+            background-color: #4a5568;
+        }
+
+        /* Garante que o botão "Voltar à Capa" na conclusão e referências use o estilo de fundo escuro */
+        #conclusao .nav-button.back-to-top,
+        #referencias .nav-button.back-to-top { 
+            background-color: #60A5FA; 
+            border-color: #93C5FD; 
+        }
+        #conclusao .nav-button.back-to-top:hover,
+        #referencias .nav-button.back-to-top:hover { 
+            background-color: #3B82F6; 
+        }
+    </style>
+</head>
+<body>
+
+    <section id="introducao" class="slide">
+        <div class="ocean-background-effects">
+            <div class="fish-container fish1"><img src="https://i.imgur.com/wn494DE.webp" alt="Peixe a nadar" onerror="this.style.display='none'"></div>
+            <div class="fish-container fish2"><img src="https://i.imgur.com/wn494DE.webp" alt="Peixe a nadar" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="slide-content">
+            <div class="intro-layout">
+                <div class="intro-texto">
+                    <h2>1. O Problema</h2>
+                    <p>
+                        O trabalho irá abordar sobre o tema Diagrama de Ishikawa. Será analisado a baixa produtividade na linha de montagem X, que resultou em atrasos e aumento de custos nos últimos seis meses de uma empresa.
+                    </p>
+                    <p>
+                    </p>
+                </div>
+                <div class="intro-imagem">
+                    <img src="https://i.imgur.com/i8kqq0o.webp" 
+                         alt="Imagem ilustrativa do problema" 
+                         class="imagem-slide"
+                         onerror="this.onerror=null;this.src='https://placehold.co/350x250/FFF/CCC?text=Erro+imagem&font=Inter';">
+                </div>
+            </div>
+            <div class="nav-buttons-container">
+                <a href="#o-que-e" class="nav-button">O que é o Diagrama?</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="o-que-e" class="slide">
+        <div class="ocean-background-effects">
+            <div class="fish-container fish3"><img src="https://i.imgur.com/wn494DE.webp" alt="Peixe a nadar" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="slide-content">
+            <h2>2. O que é o Diagrama de Ishikawa?</h2>
+            <p>
+                O Diagrama de Ishikawa, também conhecido como Diagrama Espinha de Peixe, é uma ferramenta que ajuda as pessoas a identificar possíveis causas para problemas. Em linhas gerais, ele serve para analisar os processos, em diferentes perspectivas, relacionando causas potenciais para um determinado cenário.
+            </p>
+            <div class="diagrama-ishikawa-placeholder">
+                <img src="https://i.imgur.com/jRS88Ca.webp" 
+                     alt="Esqueleto do Diagrama de Ishikawa"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/FFF/CCC?text=Erro+ao+carregar+imagem+do+diagrama&font=Inter';">
+            </div>
+            <div class="nav-buttons-container">
+                <a href="#introducao" class="nav-button">Anterior</a>
+                <a href="#construindo" class="nav-button">Construindo o Diagrama</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="construindo" class="slide">
+        <div class="ocean-background-effects">
+            <div class="fish-container fish1"><img src="https://i.imgur.com/wn494DE.webp" alt="Peixe a nadar" onerror="this.style.display='none'"></div>
+            <div class="fish-container fish4"><img src="https://i.imgur.com/wn494DE.webp" alt="Peixe a nadar" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="slide-content">
+            <h2>3. Construindo o Diagrama: Os 6Ms</h2>
+            <p>
+                Agora, veremos um exemplo de como o Diagrama de Ishikawa é aplicado na prática. Este diagrama foi preenchido com as causas levantadas para o problema específico que estamos analisando, organizadas dentro das categorias dos 6Ms.
+            </p>
+            <div class="diagrama-ishikawa-placeholder">
+                 <img src="https://i.imgur.com/0VW1H5B.webp" 
+                     alt="Diagrama de Ishikawa Preenchido"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/FFF/CCC?text=Erro+imagem&font=Inter';">
+            </div>
+            <p><strong>Categorias Comuns (6Ms):</strong></p>
+            <ul>
+                <li><strong>Método:</strong> Processos, procedimentos, fluxos de trabalho, instruções.</li>
+                <li><strong>Máquina:</strong> Equipamentos, ferramentas, tecnologia, manutenção.</li>
+                <li><strong>Mão de Obra (Pessoas):</strong> Habilidades, treinamento, qualificação, motivação, comunicação.</li>
+                <li><strong>Material:</strong> Matéria-prima, componentes, insumos, qualidade dos fornecedores.</li>
+                <li><strong>Meio Ambiente:</strong> Condições de trabalho, layout, cultura organizacional, fatores externos.</li>
+                <li><strong>Medida:</strong> Métricas, indicadores, inspeções, sistemas de controle e feedback.</li>
+            </ul>
+            <div class="nav-buttons-container">
+                <a href="#o-que-e" class="nav-button">Anterior</a>
+                <a href="#analise" class="nav-button">Análise das Causas</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="analise" class="slide">
+        <div class="ocean-background-effects">
+             <div class="fish-container fish2"><img src="https://i.imgur.com/wn494DE.webp" alt="Peixe a nadar" onerror="this.style.display='none'"></div>
+             <div class="fish-container fish5"><img src="https://i.imgur.com/wn494DE.webp" alt="Peixe a nadar" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="slide-content">
+            <h2>4. Análise das Causas Identificadas</h2>
+            <p>
+                Discuta as causas mais prováveis ou mais impactantes que foram levantadas no diagrama.
+                É comum utilizar técnicas como a dos "5 Porquês" para aprofundar a análise de algumas causas e chegar à causa raiz fundamental.
+                Priorize as causas que, se resolvidas, trarão o maior impacto positivo na solução do problema.
+            </p>
+            <img src="https://i.imgur.com/5ZBBknK.png" 
+                 alt="Imagem ilustrativa da análise" 
+                 class="imagem-slide"
+                 onerror="this.onerror=null;this.src='https://placehold.co/600x300/FFF/CCC?text=Erro+imagem&font=Inter';">
+            <p><strong>Exemplo de aprofundamento (5 Porquês):</strong></p>
+            <p>Problema: Alta taxa de produtos com defeitos.</p>
+            <ul>
+                <li>Causa no diagrama: Componente X de baixa qualidade (Material).</li>
+                <li>1º Porquê? Fornecedor alterou especificação sem aviso.</li>
+                <li>2º Porquê? Falta de inspeção de recebimento para este componente.</li>
+                <li>3º Porquê? Procedimento de inspeção não atualizado para novos riscos.</li>
+                <li>4º Porquê? Responsável pela atualização de férias e sem substituto treinado.</li>
+                <li>5º Porquê (Causa Raiz)? Falha no processo de gestão de mudanças e cobertura de férias.</li>
+            </ul>
+            <div class="nav-buttons-container">
+                <a href="#construindo" class="nav-button">Anterior</a>
+                <a href="#solucoes" class="nav-button">Soluções Propostas</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="solucoes" class="slide">
+        <div class="ocean-background-effects">
+            <div class="fish-container fish1"><img src="https://i.imgur.com/wn494DE.webp" alt="Peixe a nadar" onerror="this.style.display='none'"></div>
+            <div class="fish-container fish3"><img src="https://i.imgur.com/wn494DE.webp" alt="Peixe a nadar" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="slide-content">
+            <h2>5. Soluções Propostas e Plano de Ação</h2>
+            <p>
+                Com base na análise das causas raiz, apresente as soluções propostas ou os próximos passos para resolver o problema.
+                Para cada causa raiz prioritária, defina uma ou mais ações corretivas ou preventivas.
+            </p>
+            <img src="https://i.imgur.com/6HXedvL.webp" 
+                 alt="Imagem ilustrativa das soluções" 
+                 class="imagem-slide"
+                 onerror="this.onerror=null;this.src='https://placehold.co/600x300/FFF/CCC?text=Erro+imagem&font=Inter';">
+            <ul>
+                <li><strong>Exemplo 1:</strong> Causa Raiz: "Falha no processo de gestão de mudanças e cobertura de férias."
+                    <ul><li><em>Solução:</em> Implementar um processo formal de gestão de mudanças para especificações de fornecedores e um plano de cobertura de férias com treinamento cruzado. Responsável: Gerente de Qualidade e RH. Prazo: 45 dias.</li></ul>
+                </li>
+                <li><strong>Exemplo 2:</strong> Causa Raiz: "Procedimento de inspeção não atualizado."
+                    <ul><li><em>Solução:</em> Revisar e atualizar todos os procedimentos de inspeção de recebimento, incluindo treinamento para os inspetores. Responsável: Engenharia de Qualidade. Prazo: 30 dias.</li></ul>
+                </li>
+            </ul>
+            <p>É importante definir responsáveis, prazos e como o sucesso das ações será medido.</p>
+            <div class="nav-buttons-container">
+                <a href="#analise" class="nav-button">Anterior</a>
+                <a href="#conclusao" class="nav-button">Conclusão</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="conclusao" class="slide">
+        <div class="ocean-background-effects">
+        </div>
+        <div class="slide-content">
+            <h2>6. Conclusão</h2>
+            <p>
+                Ela oferece uma forma clara e estruturada de visualizar causas. Isso, portanto, não só facilita a identificação das raízes como reduz a possibilidade de focarmos apenas nos sintomas (efeitos).
+            </p>
+            <p>
+                Além disso, ela promove uma análise aprofundada, estimulando trabalho em equipe ao reunir diferentes perspectivas, ideias e pessoas. Por fim, sua versatilidade permite adaptações ao contexto. Assim, temos tudo de melhor no mundo da gestão reunido em uma só ferramenta!
+            </p>
+            <p><strong>Obrigado pela atenção!</strong></p>
+            <div class="nav-buttons-container">
+                <a href="#solucoes" class="nav-button">Anterior</a>
+                <a href="#referencias" class="nav-button">Referências</a>
+                <a href="paginaApresentacaoIshikawa_inicio.html" class="nav-button back-to-top">Voltar à Capa</a> 
+            </div>
+        </div>
+    </section>
+
+    <section id="referencias" class="slide">
+        <div class="ocean-background-effects">
+        </div>
+        <div class="slide-content">
+            <h2>7. Referências Bibliográficas</h2>
+            <p>Fontes consultadas:</p>
+            <ul>
+                <li>TERZONI. Diagrama de Ishikawa e Gráfico de Pareto: como utilizá-los? Disponível em: https://terzoni.com.br/leanblog/diagrama-ishikawa-e-grafico-de-pareto/</li>
+                <li>8QUALI. Diagrama de Ishikawa: O que é, Como Fazer e Exemplos. Disponível em: https://8quali.com.br/diagrama-de-ishikawa/</li>
+            </ul>
+            <div class="nav-buttons-container">
+                <a href="#conclusao" class="nav-button">Anterior</a>
+                <a href="paginaApresentacaoIshikawa_inicio.html" class="nav-button back-to-top">Voltar à Capa</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('a.nav-button[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault(); 
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start' 
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
